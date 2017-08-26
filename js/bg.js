@@ -1,16 +1,16 @@
 new p5();
 
-var SIDE = 60;
+var SIDE = 52;
 var HEIGHT = SIDE * sin(radians(60));
-var CANVAS_HEIGHT = windowHeight;
-var CANVAS_WIDTH = windowWidth;
+var GRADATIONS = 2000;
 
 var triangles;
 
+
 function setup() {
-    frameRate(10);
-    var canvas = createCanvas(windowWidth, CANVAS_HEIGHT);
-    canvas.parent('header');
+    frameRate(30);
+    var canvas = createCanvas(windowWidth, windowHeight);
+    canvas.parent('bg');
     background(255, 0, 0);
 
     triangles = fillCanvas();
@@ -26,14 +26,20 @@ function draw() {
 }
 
 
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+    triangles = fillCanvas();
+}
+
+
 function fillCanvas() {
     res = [];
     var i = 0;
-    while (i * HEIGHT < CANVAS_HEIGHT) {
+    while (i * HEIGHT < windowHeight) {
 	if (i % 2 === 0) {
-	    res = res.concat(fillRow(i * HEIGHT));
+	    res = res.concat(fillRow(i * HEIGHT, -SIDE));
 	} else {
-	    res = res.concat(fillRow(i * HEIGHT, SIDE / 2));
+	    res = res.concat(fillRow(i * HEIGHT, -(SIDE/2)));
 	}
 	i++;
     }
@@ -46,9 +52,9 @@ function fillRow(y, translation = 0) {
     res = [];
     var i = 0;
     while (i * SIDE < windowWidth) {
-	res.push(createTriangle(i * 60 + translation,
+	res.push(createTriangle(i * SIDE + translation,
 				y, 'down'));
-	res.push(createTriangle(i * 60 + translation + SIDE / 2,
+	res.push(createTriangle(i * SIDE + translation + SIDE / 2,
 				y + HEIGHT, 'up'));
 	i++;
     }
@@ -87,16 +93,19 @@ function Triangle(p1, p2, p3) {
 
     this.color = randomColor();
     this.colorTarget = randomColor();
+    this.shadeOfRed = expandColor(this.color.levels[0]);
 
     this.driftColor = function() {
-	var red = this.color.levels[0];
+	var currentRed = this.color.levels[0];
 	var targetRed = this.colorTarget.levels[0];
-	if (red < targetRed) {
-	    this.color = color(red + 1, 0, 0);
-	} else if (red > targetRed) {
-	    this.color = color(red - 1, 0, 0);
-	} else {
+	if (abs(currentRed - targetRed) < 2) {
 	    this.colorTarget = randomColor();
+	} else if (currentRed < targetRed) {
+	    this.shadeOfRed += 1;
+	    this.color = color(compressColor(this.shadeOfRed), 0, 0);
+	} else {
+	    this.shadeOfRed -= 1;
+	    this.color = color(compressColor(this.shadeOfRed), 0, 0);
 	}
     }
 
@@ -113,4 +122,12 @@ function Triangle(p1, p2, p3) {
 function randomColor() {
     var c = color(random(150, 255), 0, 0);
     return c;
+}
+
+function expandColor(v) {
+    return floor(map(v, 0, 255, 0, GRADATIONS));
+}
+
+function compressColor(v) {
+    return floor(map(v, 0, GRADATIONS, 0, 255));
 }

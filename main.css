@@ -1,20 +1,91 @@
+:root {
+    --page-margin: 8%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
     background-color: rgb(255, 0, 0);
+    font-family: "Lato", sans-serif;
+}
+
+p {
+    font-size: 18pt;
+}
+
+h1 {
+    font-size: 52pt;
+    line-height: 1em;
+    padding: 0;
+    margin: 0;
+}
+
+h2 {
+    font-size: 36pt;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 1em 0 0.5em 0;
+    margin: 0;
+}
+
+h3 {
+    margin: 0;
+    font-weight: bold;
+}
+
+.col-3 {
+    display: flex;
+}
+
+.col-3 > div {
+    width: 33%;
+    padding: 0 16px 0 16px;
 }
 
 header {
-    position: fixed;
-    z-index: 0;
-    top: 0;
     color: white;
-    background-color: rgb(255, 0, 0);
+    z-index: 2;
+    min-width: 1000px;
+    max-width: 1400px;
+    padding: 20px var(--page-margin) 0 var(--page-margin);
+    margin: 0 auto;
 }
 
-header > div {
+#lang {
     position: absolute;
-    z-index: 2;
+    right: var(--page-margin);
+    top: 1rem;
+}
+
+#lang p {
+    font-size: 16pt;
+}
+
+#lang a {
+    color: #fff;
+    opacity: 0.8;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+#lang a:hover {
+    opacity: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 1);
+}
+
+#logo > img {
+    width: 100px;
+    margin: 0 0 20px 0;
+}
+
+#bg {
+    position: fixed;
+    top: 0;
+    z-index: -1;
 }
 
 canvas {
@@ -24,17 +95,103 @@ canvas {
 
 main {
     background-color: white;
-    height: 500px;
     z-index: 2;
-    position: relative;
-    margin-top: 400px;
-    margin-bottom: 200px;
+    padding: 60px 0 120px 0;
+    margin-top: 60px;
+    margin-bottom: 220px;
     width: 100%;
+    min-width: 800px;
+
+    -webkit-clip-path: polygon(0 0, 100% 80px, 100% calc(100% - 80px), 0 100%);
+}
+
+section {
+    text-align: center;
+}
+
+section p {
+    font-size: 16pt;
+    padding: 0;
+    margin: 0;
+}
+
+section#services img {
+    margin-bottom: 10px;
+}
+
+section#examples {
+    margin-left: 0;
+    margin-right: 0;
+}
+ul#examples {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    margin-top: 40px;
+    padding-bottom: 20px;
+}
+ul#examples li {
+    display: block;
+    min-width: 500px;
+    text-align: left;
+    padding-right: 32px;
+}
+ul#examples li p {
+    font-size: 14pt;
+}
+
+section#tools ul{
+    list-style: none;
+}
+section#tools ul li{
+    display: inline;
+    margin-right: 32px;
+    font-size: 16pt;
+}
+
+section#advantages {
+    background-color: #f3f3f3;
+    margin: 40px 0 0 0;
+    padding: 20px var(--page-margin) 80px var(--page-margin);
+    -webkit-clip-path: polygon(0 40px, 100% 0, 100% 100%, 0 calc(100% - 40px));
 }
 
 footer {
+    width: 100%;
     height: 200px;
     position: fixed;
-    bottom: 0;
+    bottom: 60px;
     color: white;
+    z-index: -1;
+    opacity: 0;
+}
+
+footer > div {
+    margin: auto;
+    min-width: 1000px;
+    max-width: 1400px;
+    padding: 0 5% 0 5%;
+    text-align: center;
+}
+
+div#contacts {
+    display: flex;
+    justify-content: center;
+}
+div#contacts > div {
+    width: 260px;
+    text-align: left;
+}
+div#contacts > div p{
+    margin: 0;
+}
+
+
+.max-width {
+    max-width: 1400px;
+    margin: auto;
+}
+
+.padded {
+    padding: 20px var(--page-margin) 20px var(--page-margin);
 }

@@ -1,0 +1,8 @@
+{
+  "plugins": {
+    "postcss-cssnext": {
+      "autoprefixer": true
+    },
+    "cssnano": {}
+  }
+}
