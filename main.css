@@ -102,7 +102,7 @@ main {
     width: 100%;
     min-width: 800px;
 
-    -webkit-clip-path: polygon(0 0, 100% 80px, 100% calc(100% - 80px), 0 100%);
+    clip-path: polygon(0 0, 100% 80px, 100% calc(100% - 80px), 0 100%);
 }
 
 section {
@@ -153,7 +153,7 @@ section#advantages {
     background-color: #f3f3f3;
     margin: 40px 0 0 0;
     padding: 20px var(--page-margin) 80px var(--page-margin);
-    -webkit-clip-path: polygon(0 40px, 100% 0, 100% 100%, 0 calc(100% - 40px));
+    clip-path: polygon(0 40px, 100% 0, 100% 100%, 0 calc(100% - 40px));
 }
 
 footer {
